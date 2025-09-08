@@ -1,1 +1,76 @@
-안녕하세요!! 이곳은 VR 세상입니다.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VR 콘텐츠 메뉴</title>
+  <!-- X3DOM 라이브러리 -->
+  <link rel="stylesheet" type="text/css" href="https://www.x3dom.org/download/x3dom.css">
+  <script type="text/javascript" src="https://www.x3dom.org/download/x3dom.js"></script>
+  <style>
+    body { font-family: sans-serif; text-align: center; }
+    .menu { margin-bottom: 20px; }
+    a { margin: 0 10px; cursor: pointer; color: blue; text-decoration: underline; }
+    x3d { width: 80%; height: 500px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+
+<h1>VR 콘텐츠 선택</h1>
+
+<div class="menu">
+  <a onclick="showShape('cube')">정육면체</a>
+  <a onclick="showShape('cone')">콘</a>
+  <a onclick="showShape('cylinder')">실린더</a>
+  <a onclick="showShape('sphere')">구</a>
+</div>
+
+<x3d id="x3dScene">
+  <scene>
+    <!-- 기본 조명 -->
+    <directionalLight direction='0 -1 -1' intensity='0.8'></directionalLight>
+    <viewpoint id="vp" position='0 0 10'></viewpoint>
+    
+    <!-- Shapes -->
+    <transform id="cube" visible='false'>
+      <shape>
+        <appearance><material diffuseColor='1 0 0'></material></appearance>
+        <box size='2 2 2'></box>
+      </shape>
+    </transform>
+    
+    <transform id="cone" visible='false'>
+      <shape>
+        <appearance><material diffuseColor='0 1 0'></material></appearance>
+        <cone bottomRadius='1' height='2'></cone>
+      </shape>
+    </transform>
+    
+    <transform id="cylinder" visible='false'>
+      <shape>
+        <appearance><material diffuseColor='0 0 1'></material></appearance>
+        <cylinder radius='1' height='2'></cylinder>
+      </shape>
+    </transform>
+    
+    <transform id="sphere" visible='false'>
+      <shape>
+        <appearance><material diffuseColor='1 1 0'></material></appearance>
+        <sphere radius='1.5'></sphere>
+      </shape>
+    </transform>
+  </scene>
+</x3d>
+
+<script>
+  function showShape(shapeId) {
+    const shapes = ['cube', 'cone', 'cylinder', 'sphere'];
+    shapes.forEach(id => {
+      document.getElementById(id).setAttribute('visible', id === shapeId);
+    });
+  }
+</script>
+
+</body>
+</html>
+
